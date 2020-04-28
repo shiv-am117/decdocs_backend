@@ -10,14 +10,14 @@ var config = require('../../../config/config');
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function (property) {
-    return ((this.provider !== 'local' && !this.updated) || property.length);
+    return ((this.provider !== 'local' && !this.updated) && property.length);
 };
 
 /**
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
-    return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email, {
+    return ((this.provider !== 'local' && !this.updated) && validator.isEmail(email, {
         require_tld: false
     }));
 };
@@ -57,10 +57,7 @@ var UserSchema = new Schema({
         default: '',
         validate: [validateLocalStrategyProperty, 'Please fill in your last name']
     },
-    displayName: {
-        type: String,
-        trim: true
-    },
+    
     email: {
         type: String,
         index: {
@@ -94,7 +91,7 @@ var UserSchema = new Schema({
     roles: {
         type: [{
             type: String,
-            enum: ['user', 'admin']
+            enum: ['user', 'admin','corporation']
         }],
         default: ['user']
     },

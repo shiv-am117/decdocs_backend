@@ -24,7 +24,7 @@ exports.signup = function (req, res) {
         if (err) {
             res.status(422).send({
                 success: false,
-                message: 'Failed to signup!'
+                message: err
             })
         } else {
             res.status(200).send({

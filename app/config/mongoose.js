@@ -8,7 +8,7 @@ module.exports = function () {
     db = mongoose.connect(config.dbUrl, { useNewUrlParser: true, useCreateIndex: true }).then(function () {
         console.log('Connected to database successfully', config.dbUrl);
     }, function (err) {
-        console.log('Database connection timeout error');
+        console.log(err);
     });
 
     require('../modules/users/models/users.server.model');
