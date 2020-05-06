@@ -18,8 +18,8 @@ exports.me = function (req, res) {
                 username: result.username,
                 _id: result._id,
                 roles: result.roles,
-                firstName: result.firstName,
-                lastName: result.lastName
+                fullName: result.fullName,
+                
             }
         
             res.status(200).send(userData);

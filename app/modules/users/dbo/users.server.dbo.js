@@ -28,8 +28,8 @@ exports.validatePassword = function (userData, password, callback) {
       data.roles = userData.roles;
       data.profileImageURL = userData.profileImageURL;
       data.email = userData.email;
-      data.firstName = userData.firstName;
-      data.lastName = userData.lastName;
+      data.fullName = userData.fullName;
+      
 
       callback(null, data);
     } else {

@@ -10,7 +10,7 @@ var config = require('../../../config/config');
  * A Validation function for local strategy properties
  */
 var validateLocalStrategyProperty = function (property) {
-    return ((this.provider !== 'local' && !this.updated) && property.length);
+    return ( property.length);
 };
 
 /**
@@ -45,18 +45,12 @@ var validateUsername = function (username) {
  * User Schema
  */
 var UserSchema = new Schema({
-    firstName: {
+    fullName: {
         type: String,
-        trim: true,
         default: '',
-        validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+        
     },
-    lastName: {
-        type: String,
-        trim: true,
-        default: '',
-        validate: [validateLocalStrategyProperty, 'Please fill in your last name']
-    },
+    
     
     email: {
         type: String,
@@ -149,13 +143,7 @@ UserSchema.methods.authenticate = function (password) {
     return this.password === this.hashPassword(password);
 };
 
-UserSchema.virtual('fullName').get(function () {
-    return this.firstName + ' ' + this.lastName;
-}).set(function (fullName) {
-    var splitName = fullName.split(' ');
-    this.firstName = splitName[0] || '';
-    this.lastName = splitName[1] || '';
-});
+
 
 UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
     var _this = this;

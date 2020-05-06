@@ -7,21 +7,11 @@ var crypto = require('crypto');
 
 exports.signup = function (req, res) {
     var data = req.body;
-    let firstName = data.firstName ? data.firstName : '';
-    let lastName = data.lastName ? data.lastName : '';
-    if (firstName) {
-        data.displayName = firstName;
-    }
-    if (lastName) {
-        if (firstName) {
-            data.displayName += ' ';
-        }
-        data.displayName += lastName
-    }
-    
+    let fullName = data.Name;
     var user = new User(data);
     user.save(function (err, result) {
         if (err) {
+            console.log(err);
             res.status(422).send({
                 success: false,
                 message: err
@@ -55,6 +45,7 @@ exports.signin = function (req, res) {
         }
     ], function (err, result) {
         if (err) {
+            console.log(err);
             res.status(422).send({
                 success: false,
                 message: err
